@@ -2,6 +2,9 @@
 Copyright © 2022 chouette.21.00@gmail.com
 Released under the MIT license
 https://opensource.org/licenses/mit-license.php
+
+Ver.0.0.1 ConfigのFncを削除する。
+
 */
 package exsrapi
 
@@ -32,7 +35,6 @@ func TestOfApiActivefanNextlevel(filename string) {
 	type Config struct {
 		SR_acct string   //	SHOWROOMのアカウント名
 		SR_pswd string   //	SHOWROOMのパスワード
-		Fnc     string   //	ファンレベルを知りたいファンコミュニティのID
 		Roomid  []string //	ファンレベルを知りたい配信ルームのルームID
 	}
 	var config Config
