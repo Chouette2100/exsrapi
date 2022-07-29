@@ -2,6 +2,11 @@
 Copyright © 2022 chouette.21.00@gmail.com
 Released under the MIT license
 https://opensource.org/licenses/mit-license.php
+
+Ver.0.0.1 ConfigのFncを削除する。
+
+Ver.0.1.0 ApiLiveCurrentUser()の引数roomidをstringとしたことへ対応する。ApiLiveCurrentUser()実行時のroomidにRoomid[0]を渡す。
+
 */
 package exsrapi
 
@@ -32,29 +37,28 @@ func TestOfApiActivefanNextlevel(filename string) {
 	type Config struct {
 		SR_acct string   //	SHOWROOMのアカウント名
 		SR_pswd string   //	SHOWROOMのパスワード
-		Fnc     string   //	ファンレベルを知りたいファンコミュニティのID
 		Roomid  []string //	ファンレベルを知りたい配信ルームのルームID
 	}
 	var config Config
 	//	config.Roomid = make([]string, 0)
 
 	/*
-設定ファイルの例（１）
-sr_acct: xxxxxxxxxx
-sr_pswd: yyyyyyyyyy
-roomid:
-- "111111"
-- "222222"
+		設定ファイルの例（１）
+		sr_acct: xxxxxxxxxx
+		sr_pswd: yyyyyyyyyy
+		roomid:
+		- "111111"
+		- "222222"
 
-設定ファイルの例（２） アカウントとパスワードを環境変数で与える
-sr_acct: ${SRACCT}
-sr_pswd: ${SRPSWD}
-roomid:
-- "111111"
-- "222222"
-- "333333"
+		設定ファイルの例（２） アカウントとパスワードを環境変数で与える
+		sr_acct: ${SRACCT}
+		sr_pswd: ${SRPSWD}
+		roomid:
+		- "111111"
+		- "222222"
+		- "333333"
 
-	 */
+	*/
 	//	設定ファイルを読み込む
 	LoadConfig(filename, &config)
 
@@ -73,7 +77,7 @@ roomid:
 	client.Jar = jar
 
 	//	SHOWROOMにログインした状態にあるか？
-	lcu, status := srapi.ApiLiveCurrentUser(client, 75721)
+	lcu, status := srapi.ApiLiveCurrentUser(client, config.Roomid[0])
 	if status != 0 {
 		return
 	}
