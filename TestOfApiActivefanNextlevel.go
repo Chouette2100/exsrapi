@@ -81,9 +81,9 @@ func TestOfApiActivefanNextlevel(filename string) {
 	if status != 0 {
 		return
 	}
-	log.Printf("----------------------------------------------------\n")
-	log.Printf("%+v\n", lcu)
-	log.Printf("----------------------------------------------------\n")
+	//	log.Printf("----------------------------------------------------\n")
+	//	log.Printf("%+v\n", lcu)
+	//	log.Printf("----------------------------------------------------\n")
 
 	userid := ""
 	if lcu.User_id == 0 {
@@ -111,15 +111,15 @@ func TestOfApiActivefanNextlevel(filename string) {
 		log.Printf("********************************************************************************\n")
 		afnl, status := srapi.ApiActivefanNextlevel(client, userid, roomid)
 		if status != 0 {
-			log.Printf("***** ApiActiveFanNextlevel() returned error. status=%d\n", status)
+			fmt.Printf("***** ApiActiveFanNextlevel() returned error. status=%d\n", status)
 			return
 		}
-		log.Printf("current level = %d\n", afnl.Level)
-		log.Printf("next level =    %d\n", afnl.Next_level.Level)
+		fmt.Printf("current level = %d\n", afnl.Level)
+		fmt.Printf("next level =    %d\n", afnl.Next_level.Level)
 		for _, c := range afnl.Next_level.Conditions {
-			log.Printf("%s\n", c.Label)
+			fmt.Printf("%s\n", c.Label)
 			for _, cd := range c.Condition_details {
-				log.Printf("  %-12s (目標)%5d %-10s (実績)%5d %-10s\n", cd.Label, cd.Goal, cd.Unit, cd.Value, cd.Unit)
+				fmt.Printf("  %-12s (目標)%5d %-10s (実績)%5d %-10s\n", cd.Label, cd.Goal, cd.Unit, cd.Value, cd.Unit)
 			}
 		}
 	}
