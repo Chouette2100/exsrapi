@@ -19,6 +19,13 @@ import (
 	"github.com/Chouette2100/srapi"
 )
 
+/*
+
+Ver.0.0.0
+Ver.1.0.0 LoginShowroom()の戻り値 status を err に変更する。
+
+*/
+
 // 設定ファイルを読み込む
 //	以下の記事を参考にさせていただきました。
 //		【Go初学】設定ファイル、環境変数から設定情報を取得する
@@ -101,12 +108,13 @@ func LoginShowroom(
 	pswd string,
 ) (
 	userid string,
-	status int,
+	err error,
 ) {
 	//	SHOWROOMにログインした状態にあるか？
-	ud, status := srapi.ApiUserDetail(client)
-	if status != 0 {
-		return
+	ud, err := srapi.ApiUserDetail(client)
+	if err != nil {
+		log.Printf(" err = %+v\n", err)
+		return "0", err
 	}
 	//	log.Printf("----------------------------------------------------\n")
 	//	log.Printf("%+v\n", ud)
@@ -120,10 +128,10 @@ func LoginShowroom(
 
 		//	SHOWROOMのサービスにログインする。
 		var ul srapi.UserLogin
+		status := 0
 		ul, status = srapi.ApiUserLogin(client, csrftoken, acct, pswd)
 		if status != 0 {
-			log.Printf("***** ApiUserLogin() returned error. status=%d\n", status)
-			return
+			return "0", err
 		} else {
 			log.Printf("login status. Ok = %d User_id=%s\n", ul.Ok, ul.User_id)
 		}
@@ -133,7 +141,7 @@ func LoginShowroom(
 		//      ログインしている
 		userid = fmt.Sprintf("%d", ud.User_id)
 	}
-	return
+	return userid, nil
 
 }
 
