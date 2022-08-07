@@ -6,6 +6,7 @@ https://opensource.org/licenses/mit-license.php
 Ver.0.0.1 ConfigのFncを削除する。
 
 Ver.0.1.0 ApiLiveCurrentUser()の引数roomidをstringとしたことへ対応する。ApiLiveCurrentUser()実行時のroomidにRoomid[0]を渡す。
+Ver.1.0.0 下位の関数で戻り値をstatusかｒerrに変更したことに対応する。
 
 */
 package exsrapi
@@ -31,7 +32,7 @@ import (
 		srapi.ApiActivefanNextlevel()
 
 */
-func TestOfApiActivefanNextlevel(filename string) {
+func TestOfApiActivefanNextlevel(filename string) (err error) {
 
 	//	設定情報
 	type Config struct {
@@ -67,7 +68,7 @@ func TestOfApiActivefanNextlevel(filename string) {
 	jar, err := cookiejar.New(&cookiejar.Options{Filename: config.SR_acct + "_cookies"})
 	if err != nil {
 		log.Printf("cookiejar.New() returned error %s\n", err.Error())
-		return
+		return err
 	}
 	//	すべての処理が終了したらcookiejarを保存する。
 	defer jar.Save()
@@ -77,9 +78,10 @@ func TestOfApiActivefanNextlevel(filename string) {
 	client.Jar = jar
 
 	//	SHOWROOMにログインした状態にあるか？
-	lcu, status := srapi.ApiLiveCurrentUser(client, config.Roomid[0])
-	if status != 0 {
-		return
+	lcu, err := srapi.ApiLiveCurrentUser(client, config.Roomid[0])
+	if err != nil {
+		err = fmt.Errorf("srapi.ApiLiveCurrentUser: %w", err)
+		return err
 	}
 	//	log.Printf("----------------------------------------------------\n")
 	//	log.Printf("%+v\n", lcu)
@@ -90,13 +92,17 @@ func TestOfApiActivefanNextlevel(filename string) {
 		//	ログインしていない
 
 		//	csrftokenを取得する
-		csrftoken := srapi.ApiCsrftoken(client)
+		csrftoken, err := srapi.ApiCsrftoken(client)
+		if err != nil {
+			err = fmt.Errorf("srapi.ApiCsrftoken: %w", err)
+			return err
+		}
 
 		//	SHOWROOMのサービスにログインする。
-		ul, status := srapi.ApiUserLogin(client, csrftoken, config.SR_acct, config.SR_pswd)
-		if status != 0 {
-			log.Printf("***** ApiUserLogin() returned error. status=%d\n", status)
-			return
+		ul, err := srapi.ApiUserLogin(client, csrftoken, config.SR_acct, config.SR_pswd)
+		if err != nil {
+			err = fmt.Errorf("srapi.ApiUserLogin: %w", err)
+			return err
 		} else {
 			log.Printf("login status. Ok = %d User_id=%d\n", ul.Ok, lcu.User_id)
 		}
@@ -109,10 +115,10 @@ func TestOfApiActivefanNextlevel(filename string) {
 	for _, roomid := range config.Roomid {
 		//		ファンレベルの詳細を知る。
 		log.Printf("********************************************************************************\n")
-		afnl, status := srapi.ApiActivefanNextlevel(client, userid, roomid)
-		if status != 0 {
-			fmt.Printf("***** ApiActiveFanNextlevel() returned error. status=%d\n", status)
-			return
+		afnl, err := srapi.ApiActivefanNextlevel(client, userid, roomid)
+		if err != nil {
+			err = fmt.Errorf("srapi.ApiActivefanNextlevel: %w", err)
+			return err
 		}
 		fmt.Printf("current level = %d\n", afnl.Level)
 		fmt.Printf("next level =    %d\n", afnl.Next_level.Level)
@@ -123,5 +129,5 @@ func TestOfApiActivefanNextlevel(filename string) {
 			}
 		}
 	}
-
+	return nil
 }

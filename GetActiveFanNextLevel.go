@@ -6,7 +6,7 @@ https://opensource.org/licenses/mit-license.php
 package exsrapi
 
 import (
-	"log"
+	"fmt"
 
 	"net/http"
 
@@ -35,18 +35,18 @@ func GetActiveFanNextLevel(
 	rooms *[]srapi.RoomFollowing,
 ) (
 	roomafnls []RoomAfnl,
-	status int,
+	err error,
 ) {
 
 	roomafnls = make([]RoomAfnl, 0)
 	var afnl srapi.ActiveFanNextLevel
 	for _, room := range *rooms {
-		afnl, status = srapi.ApiActivefanNextlevel(client, userid, room.Room_id)
-		if status != 0 {
-			log.Printf("***** ApiActiveFanNextlevel() returned error. status=%d\n", status)
-			return
+		afnl, err = srapi.ApiActivefanNextlevel(client, userid, room.Room_id)
+		if err != nil {
+			err = fmt.Errorf("srapi.ApiActivefanNextlevel: %w", err)
+			return nil, err
 		}
 		roomafnls = append(roomafnls, RoomAfnl{room.Room_id, room.Main_name, afnl})
 	}
-	return
+	return roomafnls, nil
 }

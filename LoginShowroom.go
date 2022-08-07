@@ -45,13 +45,17 @@ func LoginShowroom(
 		//	ログインしていない
 
 		//	csrftokenを取得する
-		csrftoken := srapi.ApiCsrftoken(client)
+		csrftoken, err := srapi.ApiCsrftoken(client)
+		if err != nil {
+			err = fmt.Errorf("srapi.ApiCsrftoken: %w", err)
+			return "0", err
+		}
 
 		//	SHOWROOMのサービスにログインする。
 		var ul srapi.UserLogin
-		status := 0
-		ul, status = srapi.ApiUserLogin(client, csrftoken, acct, pswd)
-		if status != 0 {
+		ul, err = srapi.ApiUserLogin(client, csrftoken, acct, pswd)
+		if err != nil {
+			err = fmt.Errorf("srapi.ApiUserLogin: %w", err)
 			return "0", err
 		} else {
 			log.Printf("login status. Ok = %d User_id=%s\n", ul.Ok, ul.User_id)
