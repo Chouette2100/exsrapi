@@ -14,6 +14,19 @@ import (
 )
 
 /*
+HTTPクライアントを作り、cookiejarをセットする。
+
+**使用上の注意**
+	この関数は必ず次のような形で使ってください。
+        //      cookiejarがセットされたHTTPクライアントを作る
+        client, jar, err := exsrapi.CreateNewClient(sr_acct)
+        if err != nil {
+                log.Printf("CreateNewClient() returned error %s\n", err.Error())
+                return
+        }
+        //      すべての処理が終了したらcookiejarを保存する。
+        defer jar.Save()	//	忘れずに！
+
 
 Ver.0.0.0
 Ver.1.0.0 LoginShowroom()の戻り値 status を err に変更する。
