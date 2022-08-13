@@ -24,6 +24,7 @@ import (
 Ver.0.0.0
 Ver.1.0.0 メソッド ExtrRoomLiveByCtg() の名前を ExtrByCtg() に変更したことに対応する。
 Ver.1.1.0 ExtrByCtg() の引数がポインターになったことへ対応する。
+Ver.1.2.0 sort.Sort()をsort.Slice()に変更する。
 
 */
 
@@ -214,7 +215,10 @@ func MkRoomsForStarCollec(
 	}
 
 	//	訪問候補ルームは配信を始めたばかりのルームから選ぶため開始時刻でソートする。
-	sort.Sort(lives_c)
+	sort.Slice(*lives_c, func(i, j int) bool {
+        return (*lives_c)[i].Started_at > (*lives_c)[j].Started_at
+    })
+
 
 	lives = new([]srapi.Live)
 	i := 0
