@@ -22,6 +22,7 @@ import (
 星集め、種集めの対象とするルームの一覧を作成する。
 
 Ver.0.0.0
+Ver.1.0.0 メソッド ExtrRoomLiveByCtg() の名前を ExtrByCtg() に変更したことに対応する。
 
 */
 
@@ -205,7 +206,7 @@ func MkRoomsForStarCollec(
 	}
 
 	//	指定したカテゴリーのルームのリストを取得する。
-	lives_c, err := (*Roomonlives).ExtrRoomLiveByCtg(category)
+	lives_c, err := (*Roomonlives).ExtrByCtg(category)
 	if err != nil {
 		err = fmt.Errorf("srapi.ExtrRoomLiveByCtg(): %w", err)
 		return nil, err
