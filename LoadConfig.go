@@ -17,6 +17,7 @@ import (
 Ver.0.0.0
 Ver.1.0.0 LoginShowroom()の戻り値 status を err に変更する。
 Ver.-.-.- exsrapi.go から分離する。
+Ver.1.1.0 yaml.Unmarshal() を yaml.UnmarshalStrict() に変更する。
 
 */
 
@@ -36,7 +37,7 @@ func LoadConfig(filePath string, config interface{}) (err error) {
 	content = []byte(os.ExpandEnv(string(content)))
 	//	log.Printf("content=%s\n", content)
 
-	if err := yaml.Unmarshal(content, config); err != nil {
+	if err := yaml.UnmarshalStrict(content, config); err != nil {
 		err = fmt.Errorf("yaml.Unmarshal(): %w", err)
 		return err
 	}
