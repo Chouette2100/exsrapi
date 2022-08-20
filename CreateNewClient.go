@@ -48,7 +48,7 @@ func CreateNewClient(
 	//	Filenameは、cookieを保存するファイル名
 	jar, err = cookiejar.New(&cookiejar.Options{Filename: cookiename + "_cookies"})
 	if err != nil {
-		log.Printf("cookiejar.New() returned error %s\n", err.Error())
+		//	log.Printf("cookiejar.New() returned error %s\n", err.Error())
 		err = fmt.Errorf("cookiejar.New(): %w", err)
 		return
 	}
