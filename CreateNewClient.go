@@ -6,6 +6,7 @@ https://opensource.org/licenses/mit-license.php
 package exsrapi
 
 import (
+	"fmt"
 	"log"
 
 	"net/http"
@@ -31,6 +32,7 @@ HTTPクライアントを作り、cookiejarをセットする。
 Ver.0.0.0
 Ver.1.0.0 LoginShowroom()の戻り値 status を err に変更する。
 Ver.-.-.- exsrapi.go から分離する。
+Ver.1.0.1 errの印字をやめ、エラー内容をerrにセットして返すようにする。
 
 */
 
@@ -47,6 +49,7 @@ func CreateNewClient(
 	jar, err = cookiejar.New(&cookiejar.Options{Filename: cookiename + "_cookies"})
 	if err != nil {
 		log.Printf("cookiejar.New() returned error %s\n", err.Error())
+		err = fmt.Errorf("cookiejar.New(): %w", err)
 		return
 	}
 
