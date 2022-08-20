@@ -7,7 +7,7 @@ package exsrapi
 
 import (
 	"fmt"
-	"log"
+	//	"log"
 
 	"net/http"
 
@@ -34,6 +34,7 @@ Ver.1.0.0 LoginShowroom()の戻り値 status を err に変更する。
 Ver.-.-.- exsrapi.go から分離する。
 Ver.1.0.1 errの印字をやめ、エラー内容をerrにセットして返すようにする。
 Ver.1.0.2 ログ出力を削除する（Ver.1.0.1では、ログ出力が残っていた）
+Ver.1.0.3 logのimportを除く。
 
 */
 
