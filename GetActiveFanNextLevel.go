@@ -15,9 +15,7 @@ import (
 
 /*
 
-Ver.0.0.0
-Ver.1.0.0 LoginShowroom()の戻り値 status を err に変更する。
-Ver.-.-.- exsrapi.go から分離する。
+Ver.1.3.0 CrawlFollow()からGetFollowRooms()への置き換えにともなってrooms []srapi.RoomFollowedとした。
 
 */
 
@@ -32,7 +30,7 @@ type RoomAfnl struct {
 func GetActiveFanNextLevel(
 	client *http.Client,
 	userid string,
-	rooms *[]srapi.RoomFollowing,
+	rooms []srapi.RoomFollowed,
 ) (
 	roomafnls []RoomAfnl,
 	err error,
@@ -40,13 +38,13 @@ func GetActiveFanNextLevel(
 
 	roomafnls = make([]RoomAfnl, 0)
 	var afnl srapi.ActiveFanNextLevel
-	for _, room := range *rooms {
+	for _, room := range rooms {
 		afnl, err = srapi.ApiActivefanNextlevel(client, userid, room.Room_id)
 		if err != nil {
 			err = fmt.Errorf("srapi.ApiActivefanNextlevel: %w", err)
 			return nil, err
 		}
-		roomafnls = append(roomafnls, RoomAfnl{room.Room_id, room.Main_name, afnl})
+		roomafnls = append(roomafnls, RoomAfnl{room.Room_id, room.Room_name, afnl})
 	}
 	return roomafnls, nil
 }
