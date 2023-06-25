@@ -64,7 +64,11 @@ func GetEventidOfEventBox(
 
 		//	各イベントのURLの最後の要素（イベントを識別する文字列の部分）を取得しリストにします。
 		eida := strings.Split(eid, "/")
-		namelist = append(namelist, eida[len(eida)-1])
+		if eida[len(eida)-2] == "event" {
+			namelist = append(namelist, eida[len(eida)-1])
+		} else {
+			log.Printf("  ignored %s\n", eid)
+		}
 
 		return true
 
