@@ -18,26 +18,23 @@ import (
 Ver.0.0.0
 Ver.1.0.0 LoginShowroom()の戻り値 status を err に変更する。
 Ver.-.-.- exsrapi.go から分離する。
+Vwe.2.0.0 引数（ログファイルのプリフィックス）を可変長とする。戻り値にerrを追加する。
 
 */
 
 //	ログファイルを作る。
-func CreateLogfile(dsc1, dsc2 string) (logfile *os.File) {
+func CreateLogfile(dsc... string) (logfile *os.File, err error) {
 	//      ログファイルの設定
 	logfilename := os.Args[0]
-	if dsc1 != "" {
-		logfilename += "_" + dsc1
+	for _, dsci := range dsc {
+		logfilename += "_" + dsci
 	}
 	logfilename += "_" + time.Now().Format("20060102")
-	if dsc2 != "" {
-		logfilename += "_" + dsc2
-	}
 	logfilename += ".txt"
-	var err error
 	logfile, err = os.OpenFile(logfilename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0666)
 	if err != nil {
-		fmt.Printf("cannnot open logfile: %s\n", logfilename+" "+err.Error())
-		os.Exit(1)
+		err = fmt.Errorf("CreateLogfile(): %w", err)
+		return
 	}
 
 	//      log.SetOutput(logfile)
