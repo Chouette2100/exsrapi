@@ -51,11 +51,12 @@ type Event_Inf struct {
 	Achk        int //      1: ブロック、2:ボックス、子ルーム未処理のあいだはそれぞれ +4
 	Aclr        int //未使用
 
-	//      Event_no    int
 	EventStatus string //   "Over", "BeingHeld", "NotHeldYet"
 	Pntbasis    int
 	Ordbasis    int
 	League_ids  string
+	Valid	bool	//	データとして有効か？（内部処理で処理の分岐に使う）
+	//      Event_no    int
 	//      Status          string          //      "Confirmed":    イベント終了日翌日に確定した獲得ポイントが反映されている。
 }
 
