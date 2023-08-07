@@ -26,11 +26,16 @@ type BlockInf struct {
 	Block_list     []Block
 }
 
+type BlockInfList struct {
+	Blockinf []BlockInf
+}
+
+
 //	ブロックイベントの子のイベントのeventidを取得する。
 func GetEventidOfBlockEvent(
 	eventid string,		//	ブロックイベントの親イベントのeventid
 ) (
-	blocklist     []Block ,	//	このブロックイベントのラベルとブロック番号のペア
+	blockinflist     BlockInfList ,	//	このブロックイベントのラベルとブロック番号のペア
 
 	err error,
 ) {
@@ -64,16 +69,13 @@ func GetEventidOfBlockEvent(
 		err = fmt.Errorf("doc.Find().Attr(): %t", bl)
 		return
 	}
-	tjson = tjson[ 1: len(tjson)-1]
+	//	tjson = tjson[ 1: len(tjson)-1]
 
-	blockinf := BlockInf{}
-	blockinf.Block_list = make([]Block, 0)
-
-	err = json.NewDecoder(strings.NewReader(tjson)).Decode(&blockinf)
+	err = json.NewDecoder(strings.NewReader(tjson)).Decode(&blockinflist)
 	if err != nil {
 		err = fmt.Errorf("json.NewDecoder().Decode(): %w", err)
 		return
 	}
 
-	return blockinf.Block_list, nil
+	return
 }

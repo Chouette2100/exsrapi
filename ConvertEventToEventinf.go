@@ -26,6 +26,8 @@ func ConvertEventToEventinf(
 	eventinf.End_time = time.Unix(event.Ended_at, 0)
 	eventinf.Send_time = eventinf.End_time.Format("2006-01-02 15:04:05")	//	互換性のため
 
+	eventinf.Period, _ = MakePeriod(event.Started_at, event.Ended_at)
+
 	eventinf.Rstatus = "NowSaved"
 
 	if event.Is_event_Block {
