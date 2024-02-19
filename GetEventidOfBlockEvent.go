@@ -71,7 +71,7 @@ func GetEventidOfBlockEvent(
 	}
 	//	tjson = tjson[ 1: len(tjson)-1]
 
-	err = json.NewDecoder(strings.NewReader(tjson)).Decode(&blockinflist)
+	err = json.NewDecoder(strings.NewReader(tjson)).Decode(&blockinflist.Blockinf)
 	if err != nil {
 		err = fmt.Errorf("json.NewDecoder().Decode(): %w", err)
 		return
