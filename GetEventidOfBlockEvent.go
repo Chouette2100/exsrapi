@@ -64,7 +64,8 @@ func GetEventidOfBlockEvent(
 	}
 
 	//	ブロック情報がJSONとして得られる
-	tjson, bl := doc.Find(".js-event-lower-cate-section div div event-block").Attr("data-list")
+	//	tjson, bl := doc.Find(".js-event-lower-cate-section div div event-block").Attr("data-list")
+	tjson, bl := doc.Find("#js-event-block > event-block").Attr("data-list")
 	if !bl {
 		err = fmt.Errorf("doc.Find().Attr(): %t", bl)
 		return
