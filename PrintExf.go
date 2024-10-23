@@ -17,11 +17,11 @@ func PrintExf(comment ...string) func() {
 		if len(comment) != 0 {
 			fmtstr += comment[0]
 		}
-		fmtstr += "****> "
-		for _, c := range comment {
-			fmtstr += c
+		fmtstr += " <<<<<<<<<<<<<<<<<< "
+		for _, c := range comment[1:] {
+			fmtstr += c + " "
 		}
-		fmtstr += " %s dt=%10.3fms\n"
+		fmtstr += "%s dt=%10.3fms\n"
 		log.Printf(fmtstr, time.Now().Format("2006/01/02 15:04:05"), float64(time.Since(start).Microseconds())/1000.0)
 	}
 }
