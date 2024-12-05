@@ -46,16 +46,18 @@ type Event_Inf struct {
 	Target      int
 	Rstatus     string
 	Maxpoint    int //      グラフのy軸のスケールを固定する
+	Thinit      int
+	Thdelta     int
 	MaxPoint    int //      DBには該当するものはない（データ中最大のポイント値を意味し、内部的に使用する）
 	Gscale      int //      DBのMaxpoint = 構造体の Maxpoint + Gscale
 	Achk        int //      1: ブロック、2:ボックス、子ルーム未処理のあいだはそれぞれ +4
-	Aclr        int //未使用
+	Aclr        int //		gtplの制御のために一時的に使用する
 
 	EventStatus string //   "Over", "BeingHeld", "NotHeldYet"
 	Pntbasis    int
 	Ordbasis    int
 	League_ids  string
-	Valid	bool	//	データとして有効か？（内部処理で処理の分岐に使う）
+	Valid       bool //	データとして有効か？（内部処理で処理の分岐に使う）
 	//      Event_no    int
 	//      Status          string          //      "Confirmed":    イベント終了日翌日に確定した獲得ポイントが反映されている。
 }

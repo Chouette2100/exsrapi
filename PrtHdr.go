@@ -9,7 +9,7 @@ var Hdrspc = ""
 func PrtHdr() (
 	fncname string,
 ) {
-	fncname = FuncNameOfThisFunction() + "()"
+	fncname = FuncNameOfThisFunction(2) + "()"
 	log.Printf("%s****< %s ****", Hdrspc, fncname)
 	Hdrspc += "  "
 	return

@@ -3,12 +3,13 @@ import (
 	"runtime"
 	"strings"
 )
-func FuncNameOfThisFunction() (
+func FuncNameOfThisFunction(
+	level int,	// 1: This function, 2: Caller of this function, ...
+) (
 	funcname string,
 ){
 	// 現在のスタックから、情報を取得
-	skip := 1
-	pt, _, _, ok := runtime.Caller(skip)
+	pt, _, _, ok := runtime.Caller(level)
 	if !ok {
 		funcname = "unknown"
 		return

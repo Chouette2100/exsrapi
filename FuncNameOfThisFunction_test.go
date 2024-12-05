@@ -8,15 +8,16 @@ import (
 func TestFuncNameOfThisFunction(t *testing.T) {
 	tests := []struct {
 		name         string
+		level int
 		wantFuncname string
 	}{
 		// TODO: Add test cases.
-		{"test1", ""},
+		{"test1", 1, ""},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			fmt.Printf("FuncNameOfThisFunction() = %v, want %v\n", FuncNameOfThisFunction(), tt.wantFuncname)
-			if gotFuncname := FuncNameOfThisFunction(); gotFuncname != tt.wantFuncname {
+			fmt.Printf("FuncNameOfThisFunction() = %v, want %v\n", FuncNameOfThisFunction(tt.level), tt.wantFuncname)
+			if gotFuncname := FuncNameOfThisFunction(tt.level); gotFuncname != tt.wantFuncname {
 				t.Errorf("FuncNameOfThisFunction() = %v, want %v", gotFuncname, tt.wantFuncname)
 			}
 		})
