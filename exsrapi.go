@@ -6,6 +6,7 @@ package exsrapi
 			MakeSampleTime() データ取得タイミング（分、秒）を生成する
 			FuncNameOfThisFunction() 引数で自分自身の名称、親の名称のいずれかを取得できるようにする
 			PrtHdr() FuncNameOfThisFunction() のインターフェース変更に対応する
+	00AB01	PrtHdr()とPrintExf()の書式を統一する
 */
 
-const Version="00AB00"
+const Version="00AB01"
