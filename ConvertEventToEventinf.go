@@ -3,7 +3,7 @@ package exsrapi
 import (
 	"time"
 
-	"github.com/Chouette2100/srapi"
+	"github.com/Chouette2100/srapi/v2"
 	//	"github.com/Chouette2100/srdblib"
 )
 
