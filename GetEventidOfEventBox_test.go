@@ -26,16 +26,14 @@ func TestGetEventidOfEventBox(t *testing.T) {
 		{
 			name: "test1",
 			args: args{
-				eventid: "bestofhawaiianwedding2023_hk3",
+				eventid: "tsutsuzyuku2",
 			},
 			wantNamelist: []string{
-				"bestofhawaiianwedding2023_3",
-				"bestofhawaiianwedding2023_3b",
-				"bestofhawaiianwedding2023_3c",
-				"bestofhawaiianwedding2023_3d",
-				"bestofhawaiianwedding2023_3_2a",
-				"bestofhawaiianwedding2023_3_2b",
-				"bestofhawaiianwedding2023_3fin"},
+				"sr_tsutsuzyuku_geinin_2",
+				"sr_tsutsuzyuku_2",
+				"sr_tsutsuzyuku_talent_2",
+				"sr_tsutsuzyuku_assistantmc_2",
+			},
 			wantErr:      false,
 		},
 	}

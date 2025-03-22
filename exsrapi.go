@@ -7,6 +7,7 @@ package exsrapi
 			FuncNameOfThisFunction() 引数で自分自身の名称、親の名称のいずれかを取得できるようにする
 			PrtHdr() FuncNameOfThisFunction() のインターフェース変更に対応する
 	00AB01	PrtHdr()とPrintExf()の書式を統一する
+	00AC01	GetEventidOfEventBox()でのあたらしいボックスイベントページに対応する。
 */
 
 const Version="00AB01"

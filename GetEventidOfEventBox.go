@@ -19,9 +19,9 @@ import (
 )
 
 func GetEventidOfEventBox(
-	eventid string,		//	ボックスイベントの親のEvent_url_key（通常これをイベントIDと呼んでいます）
+	eventid string, //	ボックスイベントの親のEvent_url_key（通常これをイベントIDと呼んでいます）
 ) (
-	namelist []string,	//	ボックスイベントの子Event_url_keyのリスト
+	namelist []string, //	ボックスイベントの子Event_url_keyのリスト
 	err error,
 ) {
 
@@ -58,7 +58,31 @@ func GetEventidOfEventBox(
 	doc.Find(".event-insert-section .event-insert-section a").EachWithBreak(func(i int, s *goquery.Selection) bool {
 
 		eid, exists := s.Attr("href")
-		if ! exists {
+		if !exists {
+			return false
+		}
+
+		//	各イベントのURLの最後の要素（イベントを識別する文字列の部分）を取得しリストにします。
+		eida := strings.Split(eid, "/")
+		if eida[len(eida)-2] == "event" {
+			namelist = append(namelist, eida[len(eida)-1])
+		} else {
+			log.Printf("  ignored %s\n", eid)
+		}
+
+		return true
+
+	})
+
+	if len(namelist) > 0 {
+		return
+	}
+
+	//	イベントボックス内のすべてのイベントについて繰り返す( 2025-03-22 tsutsuzyuku2 〜)
+	doc.Find(".event-float-list a").EachWithBreak(func(i int, s *goquery.Selection) bool {
+
+		eid, exists := s.Attr("href")
+		if !exists {
 			return false
 		}
 
