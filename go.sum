@@ -1,5 +1,5 @@
-github.com/Chouette2100/srapi/v2 v2.1.1 h1:TE+ftr8thZDOEGIqhpXVOSYCjOQge6nNHFXFRkc6YhA=
-github.com/Chouette2100/srapi/v2 v2.1.1/go.mod h1:IFw/HLTezazBWmrRtxKUXu3Ik8/PCkeGXgZ9VBbtPDY=
+github.com/Chouette2100/srapi/v2 v2.2.0 h1:YivfUtg2GPzkbfibw5vbGzK9KnEYwCzuF6RKxjxCh7Y=
+github.com/Chouette2100/srapi/v2 v2.2.0/go.mod h1:IFw/HLTezazBWmrRtxKUXu3Ik8/PCkeGXgZ9VBbtPDY=
 github.com/PuerkitoBio/goquery v1.10.2 h1:7fh2BdHcG6VFZsK7toXBT/Bh1z5Wmy8Q9MV9HqT2AM8=
 github.com/PuerkitoBio/goquery v1.10.2/go.mod h1:0guWGjcLu9AYC7C1GHnpysHy056u9aEkUHwhdnePMCU=
 github.com/andybalholm/cascadia v1.3.3 h1:AG2YHrzJIm4BZ19iwJ/DAua6Btl3IwJX+VI4kktS1LM=

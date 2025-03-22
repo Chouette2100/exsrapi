@@ -7,6 +7,7 @@ https://opensource.org/licenses/mit-license.php
 package exsrapi
 
 import (
+	"log"
 	"reflect"
 	"testing"
 
@@ -24,7 +25,20 @@ func TestGetEventidOfEventBox(t *testing.T) {
 		wantErr      bool
 	}{
 		{
-			name: "test1",
+			name: "test2",
+			args: args{
+				eventid: "iitojapanselection29",
+			},
+			wantNamelist: []string{
+				"sr_tsutsuzyuku_geinin_2",
+				"sr_tsutsuzyuku_2",
+				"sr_tsutsuzyuku_talent_2",
+				"sr_tsutsuzyuku_assistantmc_2",
+			},
+			wantErr:      false,
+		},
+		{
+			name: "test2",
 			args: args{
 				eventid: "tsutsuzyuku2",
 			},
@@ -40,6 +54,7 @@ func TestGetEventidOfEventBox(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			gotNamelist, err := GetEventidOfEventBox(tt.args.eventid)
+			log.Printf("GetEventidOfEventBox(): case=%s eventid=[%s: %+v\n", tt.name, tt.args.eventid, gotNamelist)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("GetEventidOfEventBox() error = %v, wantErr %v", err, tt.wantErr)
 				return
