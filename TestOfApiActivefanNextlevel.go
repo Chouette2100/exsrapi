@@ -1,8 +1,7 @@
-/*!
-Copyright © 2022 chouette.21.00@gmail.com
-Released under the MIT license
-https://opensource.org/licenses/mit-license.php
-
+// Copyright © 2025 chouette2100@gmail.com
+// Released under the MIT license
+// https://opensource.org/licenses/mit-license.php
+/*
 Ver.0.0.1 ConfigのFncを削除する。
 
 Ver.0.1.0 ApiLiveCurrentUser()の引数roomidをstringとしたことへ対応する。ApiLiveCurrentUser()実行時のroomidにRoomid[0]を渡す。
