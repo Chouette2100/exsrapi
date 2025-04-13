@@ -8,6 +8,7 @@ package exsrapi
 			PrtHdr() FuncNameOfThisFunction() のインターフェース変更に対応する
 	00AB01	PrtHdr()とPrintExf()の書式を統一する
 	00AC01	GetEventidOfEventBox()であたらしいボックスイベントページに対応する。GetEventinf()でAPIを利用して情報を取得する
+	00AD00	CheckExistingLock()を追加する。ロックファイルの存在確認とプロセスの存在確認を行う
 */
 
-const Version="00AC01"
+const Version="00AD00"

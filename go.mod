@@ -6,6 +6,7 @@ require (
 	github.com/Chouette2100/srapi/v2 v2.2.0
 	github.com/PuerkitoBio/goquery v1.10.2
 	github.com/juju/persistent-cookiejar v1.0.0
+	golang.org/x/sys v0.30.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
