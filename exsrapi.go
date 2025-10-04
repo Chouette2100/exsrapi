@@ -13,6 +13,7 @@ package exsrapi
 	00AC01	GetEventidOfEventBox()であたらしいボックスイベントページに対応する。GetEventinf()でAPIを利用して情報を取得する
 	00AD00	CheckExistingLock()を追加する。ロックファイルの存在確認とプロセスの存在確認を行う
 	00AD01	著作権表示を統一する。
+	200302	CreateLogfile.goでログファイル名の生成にカレントディレクトリのベース名を利用する。
 */
 
-const Version="00AD01"
+const Version = "200302"
