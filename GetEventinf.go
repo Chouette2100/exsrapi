@@ -50,13 +50,14 @@ type Event_Inf struct {
 	MaxPoint    int //      DBには該当するものはない（データ中最大のポイント値を意味し、内部的に使用する）
 	Gscale      int //      DBのMaxpoint = 構造体の Maxpoint + Gscale
 	Achk        int //      1: ブロック、2:ボックス、子ルーム未処理のあいだはそれぞれ +4
-	Aclr        int //		gtplの制御のために一時的に使用する
+	Aclr        int //		1: 確定値または暫定値	0: 開催中または未開催
 
 	EventStatus string //   "Over", "BeingHeld", "NotHeldYet"
 	Pntbasis    int
 	Ordbasis    int
 	League_ids  string
 	Valid       bool //	データとして有効か？（内部処理で処理の分岐に使う）
+	Highlighted int  // 1: 注目のイベントとして強調表示する
 	//      Event_no    int
 	//      Status          string          //      "Confirmed":    イベント終了日翌日に確定した獲得ポイントが反映されている。
 }
@@ -65,6 +66,7 @@ type Event_Inf struct {
 // イベント情報を取得するためのAPIを使用するように変更されました。
 
 // GetEventinf は、イベント情報を取得します。
+//
 //	イベント情報は、Event_Inf構造体に格納されます。
 //	イベント情報は、イベントIDを指定して取得します。
 func GetEventinf(
@@ -79,11 +81,11 @@ func GetEventinf(
 	ea, err = srapi.ApiEventAbstraction(client, eventid)
 
 	*eventinfo = Event_Inf{
-		Event_ID: eventid,
+		Event_ID:   eventid,
 		I_Event_ID: ea.EventID,
 		Event_name: ea.Title,
 		Start_time: time.Unix(int64(ea.EventStartAt), 0),
-		End_time: time.Unix(int64(ea.EventEndAt), 0),
+		End_time:   time.Unix(int64(ea.EventEndAt), 0),
 	}
 	eventinfo.Period = eventinfo.Start_time.Format("2006/01/02 15:04") + " - " + eventinfo.End_time.Format("2006/01/02 15:04")
 

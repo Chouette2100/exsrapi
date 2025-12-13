@@ -14,6 +14,7 @@ package exsrapi
 	00AD00	CheckExistingLock()を追加する。ロックファイルの存在確認とプロセスの存在確認を行う
 	00AD01	著作権表示を統一する。
 	200302	CreateLogfile.goでログファイル名の生成にカレントディレクトリのベース名を利用する。
+	200303	Event_Inf構造体にHighlightedフィールドを追加する
 */
 
-const Version = "200302"
+const Version = "200303"
