@@ -15,6 +15,7 @@ package exsrapi
 	00AD01	著作権表示を統一する。
 	200302	CreateLogfile.goでログファイル名の生成にカレントディレクトリのベース名を利用する。
 	200303	Event_Inf構造体にHighlightedフィールドを追加する
+	200304	go.modのv2の抜けを修正する
 */
 
-const Version = "200303"
+const Version = "200304"
